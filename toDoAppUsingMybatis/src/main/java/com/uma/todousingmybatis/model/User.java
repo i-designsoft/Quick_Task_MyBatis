@@ -1,5 +1,7 @@
 package com.uma.todousingmybatis.model;
 
+import java.util.List;
+
 public class User {
 
 	private int id;
@@ -8,8 +10,18 @@ public class User {
 	private String mobile;
 	private String password;
 	
+	private List<ToDoItem> toDoItems;
 	
 	
+	
+
+	public List<ToDoItem> getToDoItems() {
+		return toDoItems;
+	}
+
+	public void setToDoItems(List<ToDoItem> toDoItems) {
+		this.toDoItems = toDoItems;
+	}
 
 	public String getFullName() {
 		return fullName;
