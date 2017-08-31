@@ -2,39 +2,47 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="ToDoItem">
- 
-    <resultMap id="result" type="ToDoItem">
-        <result property="id" column="id"/>
-        <result property="title" column="title"/>  
-        <result property="description" column="description"/>
-         <result property="mobile" column="mobile"/>
-          <result property="password" column="password"/>
-    </resultMap>
- 
-    <select id="selectAll" resultMap="result">
-        SELECT * FROM user;
-    </select>
- 
-    <select id="selectById" parameterType="int" resultMap="result">
-        SELECT * FROM user WHERE id = #{id}
-    </select>
- 
- <select id="login" parameterType="hashmap" resultType="User">
-	 SELECT * FROM user where email=#{email} and password=#{password}
-</select>
- 
-    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-         INSERT INTO user (fullName,id,email,mobile,password) VALUES (#{fullName},#{id},#{email},#{mobile},#{password});
-    </insert>
-    <update id="update" parameterType="User">
-        UPDATE user
-        SET name = #{name}
-        WHERE id = #{id} 
-    </update>
- 
-    <delete id="delete" parameterType="int">
-        DELETE from user WHERE id = #{id}
-    </delete>
+
+	<resultMap id="result" type="ToDoItem">
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="description" column="description" />
+
+	</resultMap>
+
+	<select id="selectAllToDoTask" resultMap="result">
+		SELECT * FROM toDoTask;
+	</select>
+
+	<select id="selectTaskById" parameterType="int" resultMap="result">
+		SELECT * FROM toDoTask WHERE id = #{id}
+	</select>
+
+	<insert id="createToDoTask" parameterType="ToDoItem"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO toDoTask (id, title, description)
+		VALUES (#{id}, #{title},
+		#{description})
+
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+
+			SELECT
+			LAST_INSERT_ID();
+
+		</selectKey>
+
+	</insert>
+
+
+	<!-- <insert id="createToDoTask" parameterType="ToDoItem" useGeneratedKeys="true" 
+		keyProperty="id" keyColumn="id"> INSERT INTO toDoTask (id,title,description) 
+		VALUES (#{id},#{title},#{description}); </insert> -->
+
+
+	<delete id="deleteTask" parameterType="int">
+		DELETE from toDoTask WHERE
+		id = #{id}
+	</delete>
 </mapper>

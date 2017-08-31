@@ -5,7 +5,8 @@
  
 <configuration>
     <typeAliases>
-        <typeAlias alias="User" type="com.uma.todousingmybatis.model.User"/>        
+        <typeAlias alias="User" type="com.uma.todousingmybatis.model.User"/>    
+        <typeAlias alias="ToDoItem" type="com.uma.todousingmybatis.model.ToDoItem"/>            
     </typeAliases>
  
     <environments default="development">
@@ -22,5 +23,6 @@
     </environments>
     <mappers>
        <mapper resource="com/uma/todousingmybatis/user.xml"/>
+        <mapper resource="com/uma/todousingmybatis/todoitem.xml"/>
     </mappers>
 </configuration>
